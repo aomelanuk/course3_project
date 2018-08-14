@@ -1,7 +1,15 @@
 
 
 ##set work directory
-setwd("~/R/coursera/c3")
+setwd("~")
+
+# Download and extract data
+
+zip_url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+download.file(zip_url, "dataset.zip")
+unzip("dataset.zip")
+
+
 
 ###Load train data
 X_train <- read.table("UCI HAR Dataset/train/X_train.txt", quote="\"", comment.char="")
@@ -53,6 +61,9 @@ colnames(subject)<-"subject"
 ##create tidy data set
 
 tdata<-cbind(subject,y,x)
+
+##clear unusable variables
+rm("activity_labels","filter","subject","x","y","zip_url")
 
 
 ## write tidy data set
