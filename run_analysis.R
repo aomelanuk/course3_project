@@ -71,13 +71,14 @@ write.table(tdata, "tdata.txt", row.name=FALSE)
 
 
 ## create tidy data set with average values by activity and subject
-average.tdata <- aggregate(tdata, by=list( subject=tdata$subject, activity=tdata$activity), FUN=mean)
-average.tdata <- average.tdata[, -(3:4)]
+library(dplyr)
+tdata<-tbl_df(tdata)
+average.tdata<-tdata%>%group_by(subject, activity)%>%summarise_all(funs(mean))
 
 
 ##write average tidy data set
 
-write.table(average.tdata, "average.tdata.txt", row.name=FALSE)
+tdawrite.table(average.tdata, "average.tdata.txt", row.name=FALSE)
 
 
 
